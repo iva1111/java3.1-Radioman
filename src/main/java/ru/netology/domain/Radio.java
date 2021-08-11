@@ -16,6 +16,12 @@ public class Radio {
     }
 
     public void setStation(int station) {
+        if (station > maxStation) {
+            return;
+        }
+        if (station < minStation) {
+            return;
+        }
         this.station = station;
     }
 
@@ -24,7 +30,7 @@ public class Radio {
         if (station < maxStation) {
             station++;
         } else {
-            station = 0;
+            station = minStation;
         }
     }
 

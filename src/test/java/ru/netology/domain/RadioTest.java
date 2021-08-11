@@ -8,13 +8,36 @@ class RadioTest {
 
     Radio radio = new Radio();
 
+    @Test // не устанавливать станцию > max
+    public void notSetStationMoreMax() {
+        radio.setStation(9);
+        assertEquals(radio.getStation(), 9);
+    }
+
+    @Test // если больше мах то ноль
+    public void moreMaxThenZero() {
+        radio.setStation(10);
+        assertEquals(radio.getStation(), 0);
+    }
+
+    @Test // если меньше мin то ноль
+    public void lessMinThenZero() {
+        radio.setStation(-1);
+        assertEquals(radio.getStation(), 0);
+    }
+
+    @Test // не устанавливать станцию > min
+    public void notSetStationMoreMin() {
+        radio.setStation(1);
+        assertEquals(radio.getStation(), 1);
+    }
+
     @Test  // установи станцию после 9 - 0
     public void setNextStationAfterNine() {
         radio.setStation(9);
         radio.nextStation();
         assertEquals(radio.getStation(), 0);
     }
-
 
     @Test  // установи станцию перед 0 - 9
     public void setPrevStationAfterZero() {
