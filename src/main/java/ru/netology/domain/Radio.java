@@ -1,45 +1,66 @@
 package ru.netology.domain;
 
 public class Radio {
-
     private int minStation = 0;
-    private int maxStation = 9;
-    private int station;
+    private int maxStation = 10;
+    private int currentStation;
+    private int nextCurrentStation;
+    private int prevCurrentStation;
     private int minVolume = 0;
-    private int maxVolume = 10;
+    private int maxVolume = 100;
     private int volume;
 
-
-    // текущая станция
-    public int getStation() {
-        return station;
+    public Radio(int minStation, int maxStation, int currentStation, int minVolume, int maxVolume, int volume, int i) {
+        this.minStation = minStation;
+        this.maxStation = maxStation;
+        this.currentStation = currentStation;
+       /* this.nextCurrentStation = nextCurrentStation;
+        this.prevCurrentStation = prevCurrentStation;*/
+        this.minVolume = minVolume;
+        this.maxVolume = maxVolume;
+        this.volume = volume;
     }
 
-    public void setStation(int station) {
-        if (station > maxStation) {
+    // max станция
+    public int getMaxStation() {
+        return maxStation;
+    }
+
+    // min станция
+    public int getMinStation() {
+        return minStation;
+    }
+
+    // текущая станция
+    public int getCurrentStation() {
+        return currentStation;
+    }
+
+    public void setCurrentStation(int currentStation) {
+        if (currentStation > maxStation) {
             return;
         }
-        if (station < minStation) {
+        if (currentStation < minStation) {
             return;
         }
-        this.station = station;
+        this.currentStation = currentStation;
     }
 
     //  следующая станция
-    public void nextStation() {
-        if (station < maxStation) {
-            station++;
+    public void nextCurrentStation() {
+        if (currentStation < maxStation) {
+            currentStation++;
         } else {
-            station = minStation;
+            currentStation = minStation;
         }
     }
 
     // предыдущая станция
-    public void prevStation() {
-        if (station > 0) {
-            station--;
+    public void prevCurrentStation() {
+        if (currentStation > 0) {
+            currentStation--;
         } else {
-            station = maxStation;
+            currentStation = maxStation;
         }
     }
 
@@ -49,26 +70,7 @@ public class Radio {
     public int getVolume() {
         return volume;
     }
-
     public void setVolume(int volume) {
         this.volume = volume;
     }
-
-
-    // увеличение звука
-    public void plusVolume() {
-        if (volume < maxVolume) {
-            volume++;
-        }
-    }
-
-    // уменьшение звука
-    public void minusVolume() {
-        if (volume > minVolume) {
-            volume--;
-        }
-    }
 }
-
-
-
