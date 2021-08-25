@@ -1,48 +1,60 @@
 package ru.netology.domain;
 
 public class Radio {
-
-    private int minStation = 0;
-    private int maxStation = 9;
-    private int station;
+    private int quantityStations = 10;
+    private int currentStation;
     private int minVolume = 0;
-    private int maxVolume = 10;
+    private int maxVolume = 100;
     private int volume;
 
-
-    // текущая станция
-    public int getStation() {
-        return station;
+    public Radio() {
     }
 
-    public void setStation(int station) {
-        if (station > maxStation) {
+    public Radio(int quantityStations, int currentStation, int minVolume, int maxVolume, int volume, int i) {
+        this.quantityStations = quantityStations;
+        this.currentStation = currentStation;
+        this.minVolume = minVolume;
+        this.maxVolume = maxVolume;
+        this.volume = volume;
+    }
+
+    // количество станций
+    public int getQuantityStation() {
+        return quantityStations;
+    }
+
+    // текущая станция
+    public int getCurrentStation() {
+        return currentStation;
+    }
+
+    public void setCurrentStation(int currentStation) {
+        if (currentStation > quantityStations) {
             return;
         }
-        if (station < minStation) {
+        if (currentStation < 0) {
             return;
         }
-        this.station = station;
+        this.currentStation = currentStation;
     }
 
     //  следующая станция
-    public void nextStation() {
-        if (station < maxStation) {
-            station++;
+    public void nextCurrentStation() {
+        if (currentStation < quantityStations) {
+            currentStation++;
         } else {
-            station = minStation;
+            currentStation = 0;
         }
     }
 
     // предыдущая станция
-    public void prevStation() {
-        if (station > 0) {
-            station--;
+    public void prevCurrentStation() {
+        if (currentStation > 0) {
+            currentStation--;
         } else {
-            station = maxStation;
+            currentStation = quantityStations;
         }
     }
-
 
 
     // текущий звук
@@ -53,21 +65,4 @@ public class Radio {
     public void setVolume(int volume) {
         this.volume = volume;
     }
-
-
-    // увеличение звука
-    public void plusVolume() {
-        if (volume < maxVolume) {
-            volume++;
-        }
-    }
-
-    // уменьшение звука
-    public void minusVolume() {
-        if (volume > minVolume) {
-            volume--;
-        }
-    }
 }
-
-
