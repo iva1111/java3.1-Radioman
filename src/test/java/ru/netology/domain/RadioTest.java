@@ -6,22 +6,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
 
-    Radio radio = new Radio(0, 10, 0, 0, 0, 0, 100);
+    Radio radio = new Radio(10, 0, 0, 0, 0, 100);
+
+    @Test
+    public void testRadio() {
+        Radio radio = new Radio();
+    }
 
     @Test  //  задавать количество радиостанций
     public void setAmountRadioStation() {
-        assertEquals(0, radio.getMinStation());
-        assertEquals(10, radio.getMaxStation());
+        assertEquals(10, radio.getQuantityStation());
     }
 
-    @Test // не устанавливать станцию > max
-    public void notSetStationMoreMax() {
+    @Test // не устанавливать станцию > заданного количества станций
+    public void notSetStationMoreQuantityStation() {
         radio.setCurrentStation(10);
         assertEquals(radio.getCurrentStation(), 10);
     }
 
-    @Test // если больше мах то ноль
-    public void moreMaxThenZero() {
+    @Test // если больше заданного количества станций то ноль
+    public void moreQuantityStationThenZero() {
         radio.setCurrentStation(11);
         assertEquals(radio.getCurrentStation(), 0);
     }

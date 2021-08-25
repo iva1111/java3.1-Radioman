@@ -1,34 +1,26 @@
 package ru.netology.domain;
 
 public class Radio {
-    private int minStation = 0;
-    private int maxStation = 10;
+    private int quantityStations = 10;
     private int currentStation;
-    private int nextCurrentStation;
-    private int prevCurrentStation;
     private int minVolume = 0;
     private int maxVolume = 100;
     private int volume;
 
-    public Radio(int minStation, int maxStation, int currentStation, int minVolume, int maxVolume, int volume, int i) {
-        this.minStation = minStation;
-        this.maxStation = maxStation;
+    public Radio() {
+    }
+
+    public Radio(int quantityStations, int currentStation, int minVolume, int maxVolume, int volume, int i) {
+        this.quantityStations = quantityStations;
         this.currentStation = currentStation;
-       /* this.nextCurrentStation = nextCurrentStation;
-        this.prevCurrentStation = prevCurrentStation;*/
         this.minVolume = minVolume;
         this.maxVolume = maxVolume;
         this.volume = volume;
     }
 
-    // max станция
-    public int getMaxStation() {
-        return maxStation;
-    }
-
-    // min станция
-    public int getMinStation() {
-        return minStation;
+    // количество станций
+    public int getQuantityStation() {
+        return quantityStations;
     }
 
     // текущая станция
@@ -37,10 +29,10 @@ public class Radio {
     }
 
     public void setCurrentStation(int currentStation) {
-        if (currentStation > maxStation) {
+        if (currentStation > quantityStations) {
             return;
         }
-        if (currentStation < minStation) {
+        if (currentStation < 0) {
             return;
         }
         this.currentStation = currentStation;
@@ -48,10 +40,10 @@ public class Radio {
 
     //  следующая станция
     public void nextCurrentStation() {
-        if (currentStation < maxStation) {
+        if (currentStation < quantityStations) {
             currentStation++;
         } else {
-            currentStation = minStation;
+            currentStation = 0;
         }
     }
 
@@ -60,16 +52,16 @@ public class Radio {
         if (currentStation > 0) {
             currentStation--;
         } else {
-            currentStation = maxStation;
+            currentStation = quantityStations;
         }
     }
-
 
 
     // текущий звук
     public int getVolume() {
         return volume;
     }
+
     public void setVolume(int volume) {
         this.volume = volume;
     }
