@@ -1,68 +1,99 @@
 package ru.netology.domain;
 
 public class Radio {
-    private int quantityStations = 10;
+    private int amountStation = 10;
     private int currentStation;
-    private int minVolume = 0;
+    private int minStation = 0;
+    private int maxStation = amountStation - 1;
     private int maxVolume = 100;
-    private int volume;
+    private int minVolume = 0;
+    private int currentVolume;
+
+
+    public Radio(int numberOfStation) {
+        amountStation = numberOfStation;
+    }
 
     public Radio() {
     }
 
-    public Radio(int quantityStations, int currentStation, int minVolume, int maxVolume, int volume, int i) {
-        this.quantityStations = quantityStations;
-        this.currentStation = currentStation;
-        this.minVolume = minVolume;
-        this.maxVolume = maxVolume;
-        this.volume = volume;
+    public int getAmountStation() {
+        return amountStation;
     }
 
-    // количество станций
-    public int getQuantityStation() {
-        return quantityStations;
+    public int getMinStation() {
+        return minStation;
     }
 
-    // текущая станция
+    public int getMaxStation() {
+        return maxStation;
+    }
+
     public int getCurrentStation() {
         return currentStation;
     }
 
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+
+    public int getMinVolume() {
+        return minVolume;
+    }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
     public void setCurrentStation(int currentStation) {
-        if (currentStation > quantityStations) {
-            return;
+        if (currentStation > maxStation) {
+            currentStation = maxStation;
         }
-        if (currentStation < 0) {
-            return;
+        if (currentStation < minStation) {
+            currentStation = minStation;
         }
         this.currentStation = currentStation;
     }
 
-    //  следующая станция
-    public void nextCurrentStation() {
-        if (currentStation < quantityStations) {
-            currentStation++;
+    public void prevStation() {
+        if (currentStation > minStation) {
+            currentStation = currentStation - 1;
         } else {
-            currentStation = 0;
+            currentStation = maxStation;
         }
     }
 
-    // предыдущая станция
-    public void prevCurrentStation() {
-        if (currentStation > 0) {
-            currentStation--;
+    public void nextStation() {
+        if (currentStation < maxStation) {
+            currentStation = currentStation + 1;
         } else {
-            currentStation = quantityStations;
+            currentStation = minStation;
         }
     }
 
 
-    // текущий звук
-    public int getVolume() {
-        return volume;
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume > maxVolume) {
+            currentVolume = maxVolume;
+        }
+        if (currentVolume < minVolume) {
+            currentVolume = minVolume;
+        }
+        this.currentVolume = currentVolume;
     }
 
-    public void setVolume(int volume) {
-        this.volume = volume;
+    public void increaseVolume() {
+        if (currentVolume < maxVolume) {
+            currentVolume = currentVolume + 1;
+        }
+    }
+
+    public void decreaseVolume() {
+        if (currentVolume > minVolume) {
+            currentVolume = currentVolume - 1;
+        }
+    }
+
+    public void setAmountStation() {
     }
 }
