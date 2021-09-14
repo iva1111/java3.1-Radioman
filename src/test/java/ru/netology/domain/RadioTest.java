@@ -6,64 +6,72 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
 
-    @Test // следует установить любую радиостанцию
-    public void shouldSetAnyRadioStation() {
-        Radio radio = new Radio();
-        radio.setCurrentStation(4);
-        assertEquals(4, radio.getCurrentStation());
+    @Test // следует установить любую радиостанцию больше заданного количества
+    public void shouldSetAnyRadioStation1() {
+        Radio radio = new Radio(20);
+        radio.setAmountStation();
+        assertEquals(20, radio.getAmountStation());
     }
 
-    @Test
+    @Test // следует установить любую радиостанцию в пределах заданного количества
+    public void shouldSetAnyRadioStation2() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(8);
+        assertEquals(8, radio.getCurrentStation());
+    }
+
+    @Test // следует установить max, min радиостанцию
     public void shouldSetMaxAndMinRadioStation() {
         Radio radio = new Radio();
-        assertEquals(10, radio.getMaxStation());
+        assertEquals(9, radio.getMaxStation());
         assertEquals(0, radio.getMinStation());
     }
 
     @Test  // должен установить предыдущую радиостанцию
     public void shouldSetPrevRadioStation() {
-        Radio radio = new Radio(9);
+        Radio radio = new Radio(10);
         radio.setCurrentStation(6);
-        radio.decreaseStation();
+        radio.prevStation();
         assertEquals(5, radio.getCurrentStation());
     }
 
     @Test  // должен установить следующую радиостанцию
     public void shouldSetNextRadioStation() {
         Radio radio = new Radio();
-        radio.setCurrentStation(6);
-        radio.increaseStation();
-        assertEquals(7, radio.getCurrentStation());
+        radio.setCurrentStation(7);
+        radio.nextStation();
+        assertEquals(8, radio.getCurrentStation());
     }
 
     @Test // должен установить радиостанцию > max
     public void shouldSetRadioStationMoreMax() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(10);
         radio.setCurrentStation(15);
-        assertEquals(0, radio.getCurrentStation());
+        radio.nextStation();
+        assertEquals(9, radio.getMaxStation());
     }
 
     @Test // должен установить радиостанцию ниже min
     public void shouldDownMinStation() {
-        Radio radio = new Radio();
-        radio.setCurrentStation(0);
-        radio.decreaseStation();
-        assertEquals(10, radio.getCurrentStation());
+        Radio radio = new Radio(9);
+        radio.setCurrentStation(-2);
+        radio.prevStation();
+        assertEquals(0, radio.getMinStation());
     }
 
     @Test // должен установить радиостанцию следующую за min
     public void shouldDownStation() {
         Radio radio = new Radio();
         radio.setCurrentStation(1);
-        radio.decreaseStation();
+        radio.prevStation();
         assertEquals(0, radio.getCurrentStation());
     }
 
     @Test // должен установить радиостанцию следующую за max
     public void shouldNextMaxStation() {
         Radio radio = new Radio();
-        radio.setCurrentStation(10);
-        radio.increaseStation();
+        radio.setCurrentStation(9);
+        radio.nextStation();
         assertEquals(0, radio.getCurrentStation());
     }
 

@@ -1,18 +1,24 @@
 package ru.netology.domain;
 
 public class Radio {
-    private int maxStation = 10;
-    private int minStation = 0;
+    private int amountStation = 10;
     private int currentStation;
+    private int minStation = 0;
+    private int maxStation = amountStation - 1;
     private int maxVolume = 100;
     private int minVolume = 0;
     private int currentVolume;
 
+
+    public Radio(int numberOfStation) {
+        amountStation = numberOfStation;
+    }
+
     public Radio() {
     }
 
-    public Radio(int numberOfStation) {
-        this.currentStation = currentStation;
+    public int getAmountStation() {
+        return amountStation;
     }
 
     public int getMinStation() {
@@ -39,18 +45,25 @@ public class Radio {
         return currentVolume;
     }
 
-
     public void setCurrentStation(int currentStation) {
         if (currentStation > maxStation) {
-            currentStation = minStation;
+            currentStation = maxStation;
         }
         if (currentStation < minStation) {
-            currentStation = maxStation;
+            currentStation = minStation;
         }
         this.currentStation = currentStation;
     }
 
-    public void increaseStation() {
+    public void prevStation() {
+        if (currentStation > minStation) {
+            currentStation = currentStation - 1;
+        } else {
+            currentStation = maxStation;
+        }
+    }
+
+    public void nextStation() {
         if (currentStation < maxStation) {
             currentStation = currentStation + 1;
         } else {
@@ -58,13 +71,6 @@ public class Radio {
         }
     }
 
-    public void decreaseStation() {
-        if (currentStation > minStation) {
-            currentStation = currentStation - 1;
-        } else {
-            currentStation = maxStation;
-        }
-    }
 
     public void setCurrentVolume(int currentVolume) {
         if (currentVolume > maxVolume) {
@@ -86,5 +92,8 @@ public class Radio {
         if (currentVolume > minVolume) {
             currentVolume = currentVolume - 1;
         }
+    }
+
+    public void setAmountStation() {
     }
 }
